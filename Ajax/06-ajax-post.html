@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload = function (ev) {
+            var oBtn = document.querySelector("button");
+            oBtn.onclick = function (evl) {
+                //1创建一个异步对象
+                var  xmlhttp = new XMLHttpRequest();
+                //2设置请求方式和请求地址；
+                xmlhttp.open("POST","06-ajax-post.php?t="+(new Date().getTime()),true);
+                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+                //3.发送请求
+                xmlhttp.send("userName=huidong&userPwd=321");
+                //4.监听状态的变化
+                xmlhttp.onreadystatechange =function (ev2) {
+                    if (xmlhttp.readyState===4) {06-ajax-post.html
+                        if (xmlhttp.status>=200&&xmlhttp.status<300||xmlhttp.status===304) {
+                            alert(xmlhttp.responseText);
+                        }else {
+                            console.log("请求失败！");
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<button>发送请求</button>
+
+</body>
+</html>

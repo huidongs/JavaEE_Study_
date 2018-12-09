@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+/*
+    1可以通过form标签的method属性指定发送请求的类型；
+    2如果是get请求会将提交的数据凭借到url后面
+    3如果是post请求会将提交的数据放到请求头中
+
+    4.GET请求和POST请求的异同
+    4.1相同点：
+    都是讲数据提交到远程服务器
+    4.2不同点
+    1）提交数据存储的位置不同
+    2）数据大小限制不同//get有限制，post没有限制
+
+    5.GET/POST请求的应用场景
+    GET请求用于提交非敏感数据和小数据
+    post用于提交敏感数据和大数据
+
+
+    */
+</head>
+<body>
+<form action="01-get-post.php" method="post">
+    <input type="text" name="userName"><br>
+    <input type="password" name="userPwd"><br>
+    <input type="submit" value="提交"><br>
+
+</form>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <script>
+        /*
+        cookie:会话跟踪技术  客户端
+        session:会话跟踪技术  服务端
+
+        cookie作用：
+              将网页中的数据保存到浏览器中
+
+        cookie生命周期：
+              默认情况下为一次会话（浏览器被关闭）
+              如果通过expires=设置了过期事件，并且世家没有过期，呢么下次打开浏览器还是存在
+        cookie注意点：
+              1.cookie默认不会保存任何数据
+              2.只能分开设置不能一次性设置多条数据
+              3.有大小和个数限制
+               个数：20~50
+               大小：4kb左右
+        cookie作用范围；
+              同一浏览器的同一路径下访问；
+              如果在同一浏览器中默认在下一级目录中也可以访问
+              如果在同一浏览器中想要在上一级目录也可以访问需要添加一个path属性才可以；
+
+              document.cookie="name=zd;path=/";
+              如需二级域名也能访问添加domain
+              document.cookie="name=zd;path=/;domain=127.0.0.1;";
+
+
+
+
+        alert(document.cookie);
+
+        var date = new Date();
+        date.setDate(date.getDate()+1);
+
+        document.cookie = "age=33;expires = date.toGMTString()";
+
+
+
+        //只能分开设置不能一次性设置多条数据
+        document.cookie="key=value"
+        document.cookie="key1=value1"
+        * */
+    </script>
+</head>
+<body>
+
+</body>
+</html>

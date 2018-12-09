@@ -1,0 +1,8 @@
+实现客户端和服务器的通信：
+1、实现一个服务器，int server(const char * ip, int port);
+要求以参数中给定的ip和端口来启动，启动之后，监听客户端的阻塞
+
+2、实现一个客户端，int client(const char * ip, int port, const char * msg);
+客户端向指定ip和端口的服务器发送消息msg，服务器收到了客户端发来的此消息之后，返回稍加修改的此消息
+
+例如：客户端向ip为127.0.0.1和端口为9000的服务器发送了一条消息"hello",服务器收到之后,向客户端返回消息 received message: hello
