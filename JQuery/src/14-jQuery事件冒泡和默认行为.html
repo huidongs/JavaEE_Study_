@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .father{
+            width: 200px;
+            height: 200px;
+            background: #000;
+        }
+        .son{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+        <script>
+            $(function () {
+                /*
+                * 1.什么是事件冒泡？
+                *   --如何阻止
+                * 2.什么是默认行为？
+                *   --如何阻止
+                * */
+
+
+                $(".son").click(function () {
+                    alert("son");
+                    //return false;   //阻止冒泡！
+                });
+                $(".father").click(function () {
+                    alert("father");
+                });
+
+                //阻止默认行为；
+                $("a").click(function () {
+                    alert("弹出注册框")
+                    return false;
+                })
+              //  $("a").click(function (event) {
+               //     alert("弹出注册框")
+              //      event.preventDefault();
+               // });
+
+                //自动触发trigger
+                $(".son").trigger("click")//触发son会触发father，事件冒泡
+
+                //triggerHandler()
+                $(".son").triggerHandler("click")//不会冒泡！
+
+                //trigger:会自动触发事件，且触发默认行为
+                //triggerHandler:不会触发默认行为；
+                $("input[type='ubmit']").triggere("click");
+            });
+        </script>
+</head>
+<body>
+<div class="father">
+    <div class="son"></div>
+</div>
+<a herf="http://www.baidu.com">注册</a>
+<form action="http://www.taobao.com">
+    <input type="text">
+    <input type="submit">
+</form>
+</body>
+</html>

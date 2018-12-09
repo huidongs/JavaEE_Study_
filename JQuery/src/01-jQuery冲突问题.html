@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.js"></script>
+    <script>
+        //1.释放$的使用权
+        //jQuery.onConflict();
+        //注意点：释放操作必须在最前；释放之后不能再使用$，改为jQuery;
+
+        //2自定义一个访问符号；
+        var nj = jQuery.noConflict();
+        nj(function () {
+            alert("hello.lnj");
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

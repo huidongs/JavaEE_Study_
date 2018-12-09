@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.js"></script>
+        <script>
+            $(function () {
+
+
+                /*
+                jQuery中有两种绑定事件方式；
+
+                * 1.eventName(fn);  //编码效率搞，部分事件jQuery没有实现，所以不能添加；
+                *
+                * 2.on(eventName,fn)；
+                * 编码效率略低/所有js事件都可以添加；
+                *
+                *
+                * *两种方法都可以添加多个相同事件，不会覆盖；
+                * */
+                function test1(){
+                    alert("hello hahah!");
+                }
+
+                $("button").click(test1);
+                $("button").on("click",function () {
+                    alert("hello lnj2")
+
+                });
+
+
+                //off方法如果不传参，会移除所有事件；
+                $("button").off();
+                //传一个，会移除所有指定类型的事件；
+                $("button").off("click");
+                //传两个，会移除指定类型的指定事件；
+                $("button").off("click",test1);
+
+
+            });
+        </script>
+</head>
+<body>
+<button>我是按钮！</button>
+</body>
+</html>

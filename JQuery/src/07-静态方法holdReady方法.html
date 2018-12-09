@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        $.holdReady(true);
+        $(document).ready(function () {
+            alert("ready");
+            
+        });
+    </script>
+</head>
+<body>
+<button>回复ready事件</button>
+<script>
+
+    var btn = document.getElementsByTagName("button")[0];
+    btn.onclick=function () {
+        $.holdReady(false);
+        
+    }
+</script>
+
+
+</body>
+</html>

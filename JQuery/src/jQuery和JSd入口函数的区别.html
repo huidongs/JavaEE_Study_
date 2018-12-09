@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.js"></script>
+
+        //原生的js如果编写了多个入口函数，后面的会覆盖前面的。
+        //jQuery不会覆盖
+
+        //原生JS会等到DOM元素加载完毕，并且图片也加载完毕才会执行
+        //jQuery会等到DOM元素加载完毕，但不会等到图片也加载完毕就会执行
+
+        //原生的Js入口函数可以拿到dom的宽高；
+        //jQuery不能拿到
+    <script>
+        // window.onload = function (ev) {
+        //     alert("inj1");
+        // }
+        // window.onload = function (ev) {
+        //     alert("inj2");
+        // }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            alert("inj1")
+        });
+
+        $(document).ready(function () {
+            alert("inj2")
+        });
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

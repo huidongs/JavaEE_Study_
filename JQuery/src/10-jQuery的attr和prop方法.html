@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.js"></script>
+        <script>
+            $(function () {
+
+                /*
+                * 1.attr(name|pro|key,val|fn)
+                * 作用:获取或者设置属性节点的值；
+                * 可以传递一个参数，也可以两个
+                * 如果传递一个参数，代表获取属性节点的值；
+                * 如果传递两个参数，代表设置属性节点的值；
+                *
+                *
+                * 如果是获取：无论找到多少个元素，都只会返回一个元素指定的属性节点的值；
+                * 如果是设置：找到多少个元素就会设置多少个元素；如果不存在，那么系统会自动新增；
+                *
+                *2. removeAttr(name);
+                * 删除属性节点；
+                * */
+                console.log($("span").attr("class"));
+                console.log($("span").attr("class","huidong"));
+                $("span").removeAttr("class name");//class和name之间以空格隔开，可以删除两个属性节点
+
+                //checked ，selected ,disabled 使用prop(),其他的使用attr（）;
+                console.log($("span").prop("class"));//true    /  false
+                console.log($("span").attr("class"));//checked /  undfined
+            });
+        </script>
+</head>
+<body>
+<span class="span1" name="hello"></span>
+<span class="span2" name="haha"></span>
+</body>
+</html>

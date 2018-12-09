@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .father{
+            width: 200px;
+            height: 200px;
+            background: #000;
+        }
+        .son{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+    <script src="../js/jquery.js"></script>
+        <script>
+            $(function () {
+
+                //想要自定义事件，必须满足两个条件
+                //1.事件必须是通过on绑定的
+                //2.事件必须是通过trigger来触发的
+
+
+                $(".son").on("myClick",function () {
+                    alert("hello");
+                    
+                });
+                $(".son").trigger("myClick");
+
+                //想要事件的命名空间有效，必须满足以下两个条件
+                //1.事件是通过on来绑定的
+                //2.通过trigger触发事件；
+                $(".son").on("myClick.zs",function () {
+                    alert("hello1");
+
+                });
+                $(".son").on("myClick.ls",function () {
+                    alert("hello2");
+
+                });
+
+               // $(".son").trigger("myClick.zs");
+                $(".son").trigger("myClick.ls");
+
+
+
+
+                //命名空间面试题
+                /*
+                * 利用trigger触发子元素带命名空间的事件，
+                * 那么父元素带和相同的命名空间的事件也会被触发
+                * ，而父元素没有命名空间的事件不会被触发
+                *
+                * 利用trigger触发子元素不带命名空间的事件，
+                * 那么子元素所有相同类型的事件和父元素所有相同类型的事件都会被触发；
+                *
+                * */
+
+
+            });
+        </script>
+
+</head>
+<body>
+<div class="father">
+    <div class="son"></div>
+</div>
+<a herf="http://www.baidu.com">注册</a>
+<form action="http://www.taobao.com">
+    <input type="text">
+    <input type="submit">
+</form>
+</body>
+</html>
