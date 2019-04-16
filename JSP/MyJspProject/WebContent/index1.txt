@@ -1,0 +1,123 @@
+请求转发和重定向的区别：
+                                请求转发   					重定向
+地址栏是否改变        不变（check.jsp）                       改变 (success.jsp)                               		
+是否保留第一次         保留                                              不保留
+请求时的数据
+请求的次数                 1                           2
+跳转发生的位置    服务端                                                客户端发出的第二次请求
+
+
+1.注释
+       html注释<!-- -->,可以被客户通过浏览器查看源代码所观察到
+       java注释 //   /*...*/
+       jsp注释<%-- --%>
+       
+
+2.JSP九大内置对象（自带的，不需要new也能使用的对象）
+ out：向客户端输出内容
+ 
+ pageContext：
+ 
+ request：请求对象，存储”客户端向服务端发送请求的消息“。
+ request对象的常见方法：
+ String getParameter(String name):根据请求字段名key，返回多字段值value
+ String[] getParameterValues(String name):根据请求字段名key，返回多字段值value
+ void setCharacterEncoding("编码格式utf-8")：设置请求编码
+ getRequestDispatcher("b.jsp").forward(request,response);  请求转发的方式跳转页面A-》B
+ ServletContext getServerContext() 获取项目的ServletContext对象
+ 示例：注册registe.jsp->show.jsp
+ 
+ response：响应对象，提供的方法：
+ void addCookie(Cookie cookie);服务端向客户端增加cookie对象
+ void sendRedirect(String location) throws IOException:页面跳转的一种方式(重定向，数据丢失)
+ void setContextType(String type);设置服务端响应的编码（设置服务端的content）
+ 示例：登录
+ login.jsp->check.jsp
+ 
+ session:会话
+ a.浏览网站：开始-关闭
+ b.购物：浏览，付款，推出
+ //面试介绍session主要内容；
+ aa.存储在服务端
+ bb.在同一个用户请求时共享；
+ cc.实现机制：第一次向服务端请求时产生一个sessionid并复制给cookie的jsessionid然后发给客户端；
+ //session方法：
+ String getID（）：获取sessionID
+ boolean isNew()：判断是否是新用户(第一次访问)
+ void invaliadate（）：使session失效（退出登录，注销）
+ setAttribute()
+ getAttribute();
+ void setMaxInactiveInterval(秒):设置最大有效非活动时间
+ int getMaxinactiveInterval():获取最大有效非活动时间
+ 示例：登录
+ session和cookie的区别：
+ 				session         cookie
+ 存储的位置：	          服务器			客户端
+ 安全性：			   安全			较不安全
+ 保存的内容：           Object			String
+ 机制：客户端第一次请求服务端时，服务端会产生一个session对象（用于保存该客户的信息）
+ 并且回个session对象都会有一个唯一的sessionID（用于区分其他session）；
+ 服务端会产生一个cookie，并且该cookie的name=JSESSIONID，value=服务端的sessionID的值；
+ 然后，服务端会在响应客户端的同时，将给cookie发送给客户端，至此客户端就有了一个cookie（jSessionid）；
+ 因此，客户端的cookie就可以和服务端的session一一对应（jsessionid-sessionid）
+ 客户端二次/n次请求服务端时，服务端会用客户端cookie中的jsessionid去服务端的session中匹配；
+ 例子：
+ 	客户端：顾客（客户端）
+ 	服务端：存包处-商场（服务端）
+ 	顾客第一次存包：商场判断此人时之前已经存过包的（通过你手里是否有钥匙）。
+	 给新顾客分配一个钥匙；
+ 	第二次/n次存包：商场判断此人时之前已经存过包的；
+ 	老顾客不分配钥匙
+ 	
+ application：全局对象
+ String() getContextPath()获取虚拟路径；
+ String() getConrealPath()虚拟路径对应的绝对路径（虚拟路径，绝对路径）；
+ config
+ page
+ exception
+ 3.Cookie(客户端，不是内置对象)：Cookie是由服务端生成的，在发送给客户端保存。
+ 相当于本地缓存的作用：客户端(hello.mp4)->服务端（hello.mp4）
+ 作用：提高访问服务端的效率，但是安全性较差。
+ Cookie: name=value
+ javax.servlet.http.Cookie
+ public Cookie(String name,String value)
+ String getName()
+ String getValue()
+ void setMaxAge(int expiry)最大有效期秒；
+ 服务端准备Cookie：   Cookie cookie = new Cookie("uname",value);
+            增加Cookie：   response.addCookie(Cookie cookie)
+ 页面跳转（转发，重定向）//将Cookie发送给客户端了
+ 客户端获取COokie：request.getCookies();
+ a.服务端增加cookie：response对象；客户端获取对象：request对象
+ b.不能直接获取某一个单独对象，只能一次性将全部cookie拿到；
+ 通过F12可以发现，除了自己设置的Cookie对象外，还有一个那么为JSESSIONNID的Cookie
+ 经典案例：自动记住账户信息
+ 
+ 4.四种范围对象：
+ pageContext JSP页面容器（page对象）   当前页面有效
+ request     请求对象                                同一次请求有效
+ session     会话对象                                同一次会话有效
+ aaplication 全局对象				全局有效（整个项目有效）
+ 以上四个对象共有的方法：
+ Object getAttriubte（String name）：根据属性名，或者属性值
+ void setAttribute（String name，Object obj）：设置属性值（新增，修改）
+ 	  setAttribute（”a“,"b"）;//如果a对象之前不存在，则新建一个a对象；如果已存在则将a的值改为b
+ void removeAttribute(String name)；根据属性名删除对象
+a.pageContext 当前页面有效，页面跳转后无效； 
+b.request     同一次请求有效；其他请求无效（请求转发后有效，重定向后无效）
+c.session     同一次会话有效（无论怎么跳转都有效，关闭/切换浏览器后无效）
+d.application 整个项目运行期间都有效（切换浏览器仍然游有效）关闭服务器，其他项目无效
+->多个项目共享，重启后仍然有效：JNDI
+1.以上四个范围对象，通过setAttribute（）复制，通过getAttribute（）取值；
+2.以上范围对象尽量使用最小的范围，因为对象范围越大，造成的资源损耗越大；
+
+5.JavaBean
+刚才我们将jsp中登录操作的代码转移到了LoginDao.java;其中loginDao为类就称之为JavaBean
+作用：a.代码复用 b.减轻jsp复杂度;
+javaBean（就是一个java类）的定义：满足一下2点，就可以称为JavaBean
+a.public修饰的类，public无参构造
+b.所有属性都是private，并且提供set/get(如果boolean，则get可以替换成is);
+使用层面，java分成为2大类：
+a.封装业务逻辑的Javabean（LoginDao.java封装了登录逻辑）   逻辑
+b.封装数据的JavaBean (实体类,Student.java Person.java))数据
+	对应于数据库的一张表，表中有什么列名就有什么属性

@@ -1,0 +1,11 @@
+clob:大文本数据
+存
+1.先通过pstmt的？代替小说内容（占位符）
+2.在同故通过pstmt。setcharacterstream(2,reader,file.lengthj)；将上一步的？替换为小说六
+取
+1。通过Reader reader = rs.getCharacterStream（“novel”）；将cloc类型的数据保存到reader对象中（mysql为text类型）
+
+blob：二进制
+与clob步骤基本一致，区别：setBinaryStream(...)   getBinarySteam(...)
+
+
